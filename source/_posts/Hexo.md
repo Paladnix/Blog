@@ -25,6 +25,11 @@ tags: [Blog, Github]
 3. Hexo
 
 ### 安装node.js
+
+在安装这个的时候卡了很久，然后才知道自己装的是Node.js, 然而需要的是Node！正确的结果是在命令行输入`node -v` 如果可以看到版本号就可以了。
+正确的安装命令是：`sudo apt install nodejs-legacy`，害怕。。。就是有这样的操作，当你install nodejs的时候，对不起，这个并不是你要的node.js， 哈，我也很绝望啊！
+
+然后要安装一下这个npm工具：
 ```bash
 $ sudo apt install npm
 $ npm -v        #看npm版本，如果结果显示版本号则安装成功
@@ -34,17 +39,23 @@ $ npm -v        #看npm版本，如果结果显示版本号则安装成功
 ```bash
 $ sudo apt install git 
 ```
+有的时候在安装完git后依旧在项目中无法使用，后面发布博客到github上面的时候会使用到git，如果报错：`Deploy not found git` 之类的，就需要再搞一下这个玩意儿！这就是软件版本混乱的锅，想说爱你不容易！
+
+```bash
+$ npm install hexo-deployer-git
+```
 
 ### 安装Hexo
 
 ```bash
 $ npm install hexo-cli -g
 ```
-
+当然这个在安装的时候也有坑出现各种问题，那就只好去百度了，我是因为前面的东西出问题后来修好后就好了。一般也不会有啥问题了。
 
 ## 使用
 
-其使用逻辑非常简单而且封装很好，命令操作也十分简洁，重点在于配置文件的修改。
+其使用逻辑非常简单而且封装很好，命令操作也十分简洁，重点在于配置文件的修改。这是个强配置的框架，事实上好的框架就应该这样，甚至可以将软件由不懂程序设计的人来使用，但是前提得有一个个很清晰的配置文件设计思路以及详细的说明书……
+
 ### 建立工作区
 ```bash
 $ hexo init Blog
@@ -110,3 +121,44 @@ $ hexo d        # 部署到`deploy`的目的地址。
 一些人气颇高的主题会有自己的官方网站，上面有更多插件的使用。如果有时间，我会补充该部分内容到该文章中。如果你对此做了整理，我也很乐意讲你的成果添加到本文的附录中。
 
 Thanks.
+
+
+## 多机同步
+
+换了公司的电脑再带着自己的电脑写博客有点太low了，最好的方式当然是无牵无挂，有网就能玩的状态，所以就需要多机同步。很自然就想到了github嘛，之前发布的时候是将生成的静态网页发布了github上，但是你的工程源文件并没有同步上去，所以要做的就是将工程文件也搞上去。然后就有两个思路：1. 在io那个仓库新建一个分支，然后把源代码搞到新分支上去。2. 搞个新的仓库，单独放工程源文件。
+
+由于我的github操作水平有限，在尝试新分支的时候总是出错，所以我就选择了另一种简单粗暴的方式。
+
+首先在本地初始化建仓库, 在github上建一个仓库，关联起来
+```bash
+$ git init
+$ git add .
+$ git commit -m 'init'
+$ git push origin master
+```
+其实就是跟普通建仓库一样的。。。有些东西没有写，其实默认应该是会的，就是添加新机器的ssh\_key到github上，`ssh-keygen -t rsa -C "你的邮箱地址"`，然后复制`~/.ssh/id_rsa.pub` 到github上就可以了。
+不过我在网桑看到了有人将文件夹下的`.gitignore`文件追加了两行：`/deploy_git` 和 `/public` 。如果你直接建仓失败了就这样搞试试。
+
+然后就是在另一台机器上，现在本地建起hexo的工作区，然后同步数据过来就好了。
+
+```bash
+$ git init
+$ git remote add origin <url>
+$ git fetch --all
+$ git reset --hard origin/master
+```
+
+这样就同步好了，接下来每次更新博客流程如下:
+
+```bash
+$ git pull
+$ hexo new XXX
+$ hexo g
+$ hexo d
+$ git add .
+$ git commit -m 'xx'
+$ git push origin master
+```
+
+
+搞起来感觉有点麻烦，因为用的是Node这个体系，不熟悉。
