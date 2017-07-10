@@ -142,7 +142,7 @@ POST还有一个加强版叫：`soap`，POST是无结构数据，就是简单的
 这个是linux自带工具，不需要安装。
 怎么用，暂时[可以看这里](http://blog.csdn.net/kofandlizi/article/details/8106841)
 
-## httpty
+## httpry
 ```bash
 sudo apt install httpry
 ```
