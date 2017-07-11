@@ -101,4 +101,36 @@ public class PrintersResource {
 ## @Consumes
 消费者，就是这个类或方法可以接受什么媒体类型的数据，例如:`@Consumes(MediaType.APPLICATION_JSON)`就说明该函数可以接受Json类型的数据。具体的用法还没有用过，暂时不写。
 
-待续...
+## @POST
+如果我们用jersey来做API的话，一般就是将POST的报文转换成JSON字符串整个传过来。这个时候参数直接就传做函数的参数，不需要做什么说明。事实上不做注解说明的函数就是被默认塞进来的参数。
+
+还有一种是表单参数。这个目前没有做过，不过我猜也是一样的。
+
+
+#Jersey Client
+
+做API最常用的就是Client了，一个以http协议为基础的请求发送端。
+```java
+   Client client = ClientBuilder.newClient();
+   WebTarget target = client.target(url);
+   
+   // put
+   Response response = target.request().accept(MediaType.APPLICATION_JSON_TYPE).put(
+                Entity.entity(obj.toJSONString(), MediaType.APPLICATION_JSON_TYPE));
+   
+   // post
+   Response response = target.request().accept(MediaType.APPLICATION_JSON_TYPE).post(
+                Entity.entity(inputJson, MediaType.APPLICATION_JSON));
+
+   // get (参数放在url中)
+   Response response = target.request().get();
+   
+    if(response == null || response.getStatus() != 200 )
+        // 请求失败
+
+   String detail = response.readEntity(String.class);
+   JSONObject object = JSON.parseObject(objString);
+
+   client.close();
+```
+基本用法就是这样了，可以用来对自己的API进行测试，也可以去调其他的API。

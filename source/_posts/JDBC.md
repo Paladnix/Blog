@@ -130,3 +130,39 @@ Java 的文档已经非常的详细了，除了是英文版，其他的都非常
 以上只是简单的基础使用和一些基本概念的理解，以后会补充JDBC事务的概念，以及JDBC与SQL之间的数据类型转换等。
 
 会了这个你就基本懂php 中PDO的使用了。
+
+# 常用代码实例
+有一些常用的代码，就直接写在这里，用的到的时候直接Copy上就好了。
+
+## 获取insert后自增字段值
+用于在资源创建后获取资源ID， 要求具有原子性。
+```java
+    private String insertSQL(String sql) {
+        TDataSource ds = new TDataSource();
+        ds.setAppName(APP_NAME);
+        ds.setSharding(false);
+        ds.init();
+        ResultSet rs;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        long ret = 0;
+        try {
+            conn = ds.getConnection();
+            // important & 
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int rows = ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            if( rs.next() ) {
+                ret = rs.getLong(1);
+            }
+            conn.close();
+            ps.close();
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Long.toString(ret);
+
+    }
+```
