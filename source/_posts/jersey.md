@@ -107,7 +107,7 @@ public class PrintersResource {
 还有一种是表单参数。这个目前没有做过，不过我猜也是一样的。
 
 
-#Jersey Client
+# Jersey Client
 
 做API最常用的就是Client了，一个以http协议为基础的请求发送端。
 ```java
