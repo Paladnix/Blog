@@ -138,10 +138,9 @@ Java 的文档已经非常的详细了，除了是英文版，其他的都非常
 用于在资源创建后获取资源ID， 要求具有原子性。
 ```java
     private String insertSQL(String sql) {
-        TDataSource ds = new TDataSource();
-        ds.setAppName(APP_NAME);
-        ds.setSharding(false);
-        ds.init();
+        //Connection 参考上面的代码
+        ...
+        // 
         ResultSet rs;
         Connection conn = null;
         PreparedStatement ps = null;
