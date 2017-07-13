@@ -30,6 +30,7 @@ apache-tomcat/logs/
 2. 到其bin/目录下，linux执行./startup.sh, windows执行startup.bat脚本。
 3. 前提是需要配置JDK到环境变量。
 4. 打开http://IP:8080 查看效果。
+
 ### 发布应用
 将你的应用编译打包成一个war包，然后copy到其webapps文件夹下，通过`http://IP:8080/NameOfWar`访问。
 如何开发Java Web？你需要了解：`servlet`、`SpringMVC`、`maven`、`javaBean`等。
