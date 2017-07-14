@@ -16,7 +16,7 @@ tags: [ACM]
 
 题目整体偏难，除签到题外应该都是银牌及以上题目，基本上要掌握到这个程度才算可以。
 
-# A. [HDU 5777](http://acm.hdu.edu.cn/showproblem.php?pid=5777) 签到题
+## A. [HDU 5777](http://acm.hdu.edu.cn/showproblem.php?pid=5777) 签到题
 
 某一场BestCoder的B题，很简单的思维小题目。
 ```c++
@@ -52,7 +52,7 @@ int main()
 }
 ```
 
-# B. [Poj 3581](http://poj.org/problem?id=3581) 后缀数组 + 细节处理
+## B. [Poj 3581](http://poj.org/problem?id=3581) 后缀数组 + 细节处理
 
 #### 题意：
 给一个序列，让你分成三段，段内反转一下，然后使得新拼接成的序列字典序最小，字典序的意思就是你懂得。题目保证第一个数字最大。
@@ -67,7 +67,7 @@ int main()
 代码暂时不在手边，回头补。
 ```
 
-# C. [Poj 2228](http://poj.org/problem?id=2228) DP+循环情况处理
+## C. [Poj 2228](http://poj.org/problem?id=2228) DP+循环情况处理
 
 #### 题意：
 就是给N个数，选B个，问和最大是多少。
@@ -130,13 +130,13 @@ int main()
 }
 ```
 
-# D. [Poj 2155](http://poj.org/problem?id=2155) 二维树状数组/二维线段树(区域修改，单点查询)
+## D. [Poj 2155](http://poj.org/problem?id=2155) 二维树状数组/二维线段树(区域修改，单点查询)
 
 会二维的都能秒出。不会的也是可以推出来的，只有一点点的难度，距离真正的二维操作差得还远，如果有时间建议学习一下二维树状数组的区间改值与区间加值区间求和等操作。
 手边没有，暂时不送了。
 
 
-# E. [UVA 11853](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2953) DFS乱搞
+## E. [UVA 11853](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2953) DFS乱搞
 
 题意很简单，一个1000×1000的方格上有一些圆，不能从圆范围经过，问是否有从左到右的一条路。这是大连2016的热身赛最后一题。
 1. 先判断有没有，这个从上边界往下DFS能到下边界的就说明没有路。
@@ -145,20 +145,21 @@ int main()
 代码回头再补。
 ```
 
-# F. [HDU 4609](http://acm.hdu.edu.cn/showproblem.php?pid=4609) FFT基础题
+## F. [HDU 4609](http://acm.hdu.edu.cn/showproblem.php?pid=4609) FFT基础题
 
 给n个线段，求取三个组成三角形的概率，就是组成三角形的个数。
 离散化+fft。FFT入门题。
 
-# G. [HDU 5676](http://acm.hdu.edu.cn/showproblem.php?pid=5676) DFS + 二分
+## G. [HDU 5676](http://acm.hdu.edu.cn/showproblem.php?pid=5676) DFS + 二分
 
 这一题就是打个表，然后二分答案就可以了。打表就DFS。最大的那个数会爆，特判一下。
 
-# H. [Poj 2728](http://poj.org/problem?id=2728) 最优比例生成树(0-1分数规划)/二分
+## H. [Poj 2728](http://poj.org/problem?id=2728) 最优比例生成树(0-1分数规划)/二分
 这一题二分答案去判断是可以过的。正解是0-1分数规划，不过这个不是我出这一题的本意，本意就是想让你们二分做掉。
 
-# 总结
+## 总结
 
 题目很看功力，结果跟预料的差不多。
 比赛不重要，但是希望你们能掌握上面的东西。
 有的时候就是到了赛场上，发现题目很熟悉，但就是跟你的能力隔了一点点的小沟，如果当时学这个东西能学的深一点，这题就过了。这就是我出这场题目的意思。
+上班写的，比较粗糙，晚上再补补。
