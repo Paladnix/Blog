@@ -26,6 +26,31 @@ tools to do what you want. That's also why virtually all curl options that allow
 file or writing to a file, also have the ability to select doing it to stdout or from stdin.`
 这是我喜欢Linux的其中一个原因，称之为优雅。
 
-鉴于看了几个小时的文档，就没有时间写了，待续...
+使用curl来测试http的接口十分方便，下面简单的介绍下如何发起`get`和`post`请求。
+
+## GET Request
+
+```bash
+$ curl -v "http://www.baidu.com"  # 显示get请求全过程解析
+
+$ curl "http://www.baidu.com"     # 如果这里的URL指向的是一个文件或者一幅图都可以直接下载到本地
+
+$ curl -i "http://www.baidu.com"  # 显示全部信息
+
+$ curl -l "http://www.baidu.com"  # 只显示头部信息
+
+$ curl "http://www.baidu.com?param=xx&id=xx"
+```
+
+
+## POST Request
+
+```bash
+$ curl -d "param1=value1&param2=value2" "http://www.baidu.com"
+# general form
+
+$ curl -l -H "Content-type: application/json" -X POST -d '{"phone":"13521389587","password":"test"}' http://domain/apis/users.json
+# json form
+```
 
 
