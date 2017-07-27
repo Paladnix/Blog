@@ -235,7 +235,7 @@ log4j.appender.abnormalQpsTenant.file= ${catalina.home}/logs/tiddo/healthReport/
 
 关于其输出到其他地方的做法，留待以后探索，参考自[Blog](http://blog.csdn.net/azheng270/article/details/2173430/)。
 
-**log4j.XML**
+**log4j.xml**
 当你对`properties`的规则有所了解之后，再看xml格式的就很好理解了。本质是一样的，只是换了一种组织形式。
 在其中我们找到`root`、`appender`、`layout`
 ```xml
