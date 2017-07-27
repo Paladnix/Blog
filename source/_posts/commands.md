@@ -15,12 +15,13 @@ Tomcat是最烂的软件，没有之一！Over!
 一般我会开两个终端窗口，一屏左右各占一个。开发服务器相关的应用的时候左边终端在本地，右侧终端`ssh`连进服务器。就单单这一个操作，在windows下就要复杂N倍，要安装软件才能支持`ssh`协议，还要软件模拟服务器终端，丑的要死不说，各种切换操作都要依靠鼠标... 而在linux的终端下，每个操作都只是简单的一个命令的事情，可以用命令完整精准的描述你的想法，所想即所得。
 
 下面几个命令，很强大。
+`ps`、`less`、`head`、`tail`、`grep`、`watch`...
 
 ## ps
 你知道Tomcat自己的`bin/shutdown.sh`是无法把自己关闭的吗？很抱歉，我特么这么用了一天了。然后ps发现一堆tomcat进程在跑，顿时恐惧袭上心头。关不掉你就别写个`shutdown.sh`啊，坑死爸爸了。
 下次要关tomcat就特么直接`kill`，就不用那么麻烦了。
 
-`ps` 命令是一个系统进程的快照。
+`ps` 命令是一个系统进程的快照。他通过读取`/proc`文件的方式获取信息。
 使用`man` 命令获取内置说明文档：`man ps`，就可以看到各个参数的说明。这里会介绍一些参数的用法，但是仅仅是做个记录而已，有价值的东西是后面的实战例子。
 
 在参数中，`ps`命令支持三种命令格式：
@@ -36,6 +37,8 @@ GNU     两个连续短线(two dash)：--a 参数
 -e              获取所有的进程，与-A 一毛一样。
 
 -aux            获取所有的进程的详细信息。包括没有tty的进程和leader进程。
+                包含一下信息：
+                USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
 
 -C cmdlist      获取对应cmd的进程
 
@@ -51,8 +54,136 @@ GNU     两个连续短线(two dash)：--a 参数
                 example: 按内存使用排序 ps -aux --sort -pmem
                 example: ps -aux --sort -pcpu,+pmem 多标准排序
 
-k               不加               
+k               与sort同等作用
 
 -L pid          获取特定进程的所有线程
 
+-jaxf           以树形显示进程
+
+-eo             控制输出，可用来产看特定字段信息
+                example: ps -eo pid,user,args 查看谁登录了你的机器
+
+-m              在进程后面输出线程
+```
+上面这些只是基础知识，下面在补充一些：
+**进程状态STAT代码**
+```
+               D    uninterruptible sleep (usually IO)
+               R    running or runnable (on run queue)
+               S    interruptible sleep (waiting for an event to complete)
+               T    stopped by job control signal
+               t    stopped by debugger during the tracing
+               W    paging (not valid since the 2.6.xx kernel)
+               X    dead (should never be seen)
+               Z    defunct ("zombie") process, terminated but not reaped by its parent
+
+               <    high-priority (not nice to other users)
+               N    low-priority (nice to other users)
+               L    has pages locked into memory (for real-time and custom IO)
+               s    is a session leader
+               l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads
+                    do)
+               +    is in the foreground process group
+
+
+```
+
+**-o 输出格式**
+example： ps -eo "%p %y %x %c"
+```
+
+       CODE   NORMAL   HEADER
+       %C     pcpu     %CPU
+       %G     group    GROUP
+       %P     ppid     PPID
+       %U     user     USER
+       %a     args     COMMAND
+       %c     comm     COMMAND
+       %g     rgroup   RGROUP
+       %n     nice     NI
+       %p     pid      PID
+       %r     pgid     PGID
+       %t     etime    ELAPSED
+       %u     ruser    RUSER
+       %x     time     TIME
+       %y     tty      TTY
+       %z     vsz      VSZ
+
+```
+
+## less
+是一个文本查看器，`more`的升级版，且以vi命令为基础。
+类似的命令有下面几个：
+```
+cat     由第一行开始显示内容，并将所有内容输出
+ 
+tac     从最后一行倒序显示内容，并将所有内容输出
+ 
+more    根据窗口大小，一页一页的现实文件内容
+ 
+less    和more类似，但其优点可以往前翻页，而且进行可以搜索字符
+ 
+head    只显示头几行
+ 
+tail    只显示最后几行
+ 
+nl      类似于cat -n，显示时输出行号
+ 
+tailf   类似于tail -f
+
+```
+less 选项参数
+```
+-N      显示每行的行号
+
+空格    向下翻页
+d       向后翻半页
+u       向前滚动半页
+/       向下搜索
+?       向上搜索
+ma      使用 a 标记文本的当前位置
+'a      导航到标记 a 处
+
+```
+文件参数有多个的时候可以打开多个文件，使用`:n`下一个文件，`:p`上一个文件。
+也可以在less中`:e file` 打开新的文件。
+
+## head
+```
+head -n 10 # 显示前10行
+```
+
+## tail
+显示文件最后几行，最关键是当文件尾内容在增加的时候会在这里动态更新出来。
+看示例你就明白用来做什么了。
+```
+tail -f xxx.log
+```
+
+## grep
+这是个匹配命令，明天详细写。
+
+## watch 
+watch可以帮你监测一个命令的运行结果，周期性的执行下个程序
+```
+-n      间隔秒数，默认2s
+
+-d      高亮发生变化的位置
+
+-d=cumulative   将历史中变化过的地方都标记出来
+
+-t 或-no-title  会关闭watch命令在顶部的时间间隔,命令，当前时间的输出。
+
+```
+**Example**
+```
+watch -d -n 1 netstat -ntlp
+
+watch -n 1 ”df -i;df”  #监测磁盘inode和block数目变化情况
+
+watch -n 60 -d du -ah # 查看usb3.0拷贝到该目录下面的速度
+
+watch -n 1 ‘ps -aux --sort -pmem, -pcpu’ # 动态查看进程排序信息
+
+watch -n 1 ‘ps -aux --sort -pmem, -pcpu | head 20’ # 动态查看前10名
 ```
