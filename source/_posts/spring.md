@@ -150,48 +150,132 @@ AOP技术是建立在Java语言的反射机制与动态代理机制之上的。�
 ## maven配置
 
 ```
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.hello</groupId>
+    <artifactId>hello</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>hello Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+  <properties>
+	<jdk.version>1.8</jdk.version>
+	<spring.version>4.3.9.RELEASE</spring.version>
+	<jstl.version>1.2</jstl.version>
+	<servletapi.version>3.1.0</servletapi.version>
+  </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-core</artifactId>
-    <version>4.3.9.RELEASE</version>
+    <version>${spring.version}</version>
+    <exclusions>
+        <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </exclusion>
+    </exclusions>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context</artifactId>
-    <version>4.3.9.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-beans</artifactId>
-    <version>4.3.9.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-web</artifactId>
-    <version>4.3.9.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-webmvc</artifactId>
-    <version>4.3.9.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-aop</artifactId>
-    <version>4.3.9.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>4.3.9.RELEASE</version>
+    <version>${spring.version}</version>
 </dependency>
 
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>${jstl.version}</version>
+	</dependency>
+
+	<!-- compile only, deployed container will provide this -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>${servletapi.version}</version>
+		<scope>provided</scope>
+	</dependency>
+  </dependencies>
+
+
+  <build>
+      <finalName>hello</finalName>
+
+		<plugins>
+		    <!-- Eclipse project -->
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-eclipse-plugin</artifactId>
+			<version>2.9</version>
+			<configuration>
+			        <!-- Always download and attach dependencies source code -->
+				<downloadSources>true</downloadSources>
+				<downloadJavadocs>false</downloadJavadocs>
+				<!-- Avoid type mvn eclipse:eclipse -Dwtpversion=2.0 -->
+				<wtpversion>2.0</wtpversion>
+			</configuration>
+		  </plugin>
+
+		  <!-- Set JDK Compiler Level -->
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.3</version>
+			<configuration>
+                <source>${jdk.version}</source>
+                <target>${jdk.version}</target>
+			</configuration>
+		  </plugin>
+
+		  <!-- For Maven Tomcat Plugin -->
+		  <plugin>
+			<groupId>org.apache.tomcat.maven</groupId>
+			<artifactId>tomcat8-maven-plugin</artifactId>
+			<version>2.2</version>
+			<configuration>
+				<path>/CounterWebApp</path>
+			</configuration>
+		  </plugin>
+
+		</plugins>
+  </build>
+
+</project>
 
 ```
