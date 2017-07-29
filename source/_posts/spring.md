@@ -19,7 +19,7 @@ Spring 是为了解决企业应用程序开发复杂性而创建的。框架的�
 
 每个模块的功能如下:
 
-``
+```
 核心容器：核心容器提供 Spring 框架的基本功能。核心容器的主要组件是 BeanFactory，它是工厂模式的实现。BeanFactory 使用控制反转 （IOC） 模式将应用程序的配置和依赖性规范与实际的应用程序代码分开。
 
 Spring Context：Spring 上下文是一个配置文件，向 Spring 框架提供上下文信息。Spring 上下文包括企业服务，例如 JNDI、EJB、电子邮件、国际化、校验和调度功能。
@@ -34,7 +34,7 @@ Spring Web 模块：Web 上下文模块建立在应用程序上下文模块之�
 
 Spring MVC 框架：MVC 框架是一个全功能的构建 Web 应用程序的 MVC 实现。通过策略接口，MVC 框架变成为高度可配置的，MVC 容纳了大量视图技术，其中包括 JSP、Velocity、Tiles、iText 和 POI。
 
-``
+```
 就这一段我copy过来的东西就有很多新鲜的东西。解释一下：
 **工厂模式和bean**
 这个东西就很大，简单说，工厂模式是一种设计模式。程序设计，搞到现在终于体会到什么是程序设计了吧。跟工业革命是一个道理，从手工作坊到工厂生产。这种设计模式无非就是要简化你写代码的过程，而这个工厂模式就是用来简化对象创建过程的一个设计模式。
@@ -149,13 +149,32 @@ AOP技术是建立在Java语言的反射机制与动态代理机制之上的。�
 
 ## maven配置
 
+命令行使用mvn构建项目很简单。
+```bash
+mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-webapp  -DarchetypeVersion=1.0   -DgroupId=com.test  -DartifactId=first   -Dversion=1.0
 ```
+生成的目录如下：
+```
+.
+└── first
+    ├── pom.xml
+    └── src
+        └── main
+            ├── resources
+            └── webapp
+                ├── index.jsp
+                └── WEB-INF
+                    └── web.xml
 
+```
+然后配置`pom.xml`。
+
+```
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hello</groupId>
-    <artifactId>hello</artifactId>
+    <groupId>com.first</groupId>
+    <artifactId>first</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>hello Maven Webapp</name>
@@ -187,36 +206,36 @@ AOP技术是建立在Java语言的反射机制与动态代理机制之上的。�
         </exclusion>
     </exclusions>
 </dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-context</artifactId>
-    <version>${spring.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-beans</artifactId>
-    <version>${spring.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-web</artifactId>
-    <version>${spring.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-webmvc</artifactId>
-    <version>${spring.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-aop</artifactId>
-    <version>${spring.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-jdbc</artifactId>
-    <version>${spring.version}</version>
-</dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aop</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
 
 	<dependency>
 		<groupId>javax.servlet</groupId>
@@ -235,7 +254,7 @@ AOP技术是建立在Java语言的反射机制与动态代理机制之上的。�
 
 
   <build>
-      <finalName>hello</finalName>
+      <finalName>first</finalName>
 
 		<plugins>
 		    <!-- Eclipse project -->
@@ -279,3 +298,4 @@ AOP技术是建立在Java语言的反射机制与动态代理机制之上的。�
 </project>
 
 ```
+
