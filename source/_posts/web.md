@@ -19,7 +19,7 @@ ServletContext application = ServletContextEvent.getServletContext();
 context-param的值 = application.getInitParameter("context-param的键");
 ```
 得到这个context-param的值之后，你就可以做一些操作了。
-**举例**：你可能想在项目启动之前就打开数据库，那么这里就可以在<context-param>中设置数据库的连接方式（驱动、url、user、password），在监听类中初始化数据库的连接。这个监听是自己写的一个类，除了初始化方法，它还有销毁方法，用于关闭应用前释放资源。比如:说数据库连接的关闭，此时，调用contextDestroyed(ServletContextEvent args)，关闭Web应用时，系统调用Listener的该方法。
+**举例**：你可能想在项目启动之前就打开数据库，那么这里就可以在`<context-param>`中设置数据库的连接方式（驱动、url、user、password），在监听类中初始化数据库的连接。这个监听是自己写的一个类，除了初始化方法，它还有销毁方法，用于关闭应用前释放资源。比如:说数据库连接的关闭，此时，调用contextDestroyed(ServletContextEvent args)，关闭Web应用时，系统调用Listener的该方法。
 
 所以归根结底，这个`<context-param>`就是用来存一些配置数据的地方。
 
@@ -67,7 +67,7 @@ context-param的值 = application.getInitParameter("context-param的键");
 
 有两种为应用配置listener的方式：
 - 使用@WebListener修饰Listener实现类即可。
-- 在web.xml文档中使用<listener>进行配置。
+- 在web.xml文档中使用`<listener>`进行配置。
 
 在下一节配置spring的加载类的时候会给出例子。
 
@@ -99,7 +99,7 @@ context-param的值 = application.getInitParameter("context-param的键");
 ```
 
 ### Filter
-Filter可认为是Servle的一种“加强版”，主要用于对用户请求request进行预处理，也可以对Response进行后处理，是个典型的处理链。使用Filter的完整流程是：Filter对用户请求进行预处理，接着将请求HttpServletRequest交给Servlet进行处理并生成响应，最后Filter再对服务器响应HttpServletResponse进行后处理。Filter与Servlet具有完全相同的生命周期，且Filter也可以通过<init-param>来配置初始化参数，获取Filter的初始化参数则使用FilterConfig的getInitParameter()。
+Filter可认为是Servle的一种“加强版”，主要用于对用户请求request进行预处理，也可以对Response进行后处理，是个典型的处理链。使用Filter的完整流程是：Filter对用户请求进行预处理，接着将请求HttpServletRequest交给Servlet进行处理并生成响应，最后Filter再对服务器响应HttpServletResponse进行后处理。Filter与Servlet具有完全相同的生命周期，且Filter也可以通过`<init-param>`来配置初始化参数，获取Filter的初始化参数则使用FilterConfig的getInitParameter()。
 
 换种说法，Servlet里有request和response两个对象，Filter能够在一个request到达Servlet之前预处理request，也可以在离开Servlet时处理response，Filter其实是一个Servlet链。以下是Filter的一些常见应用场合，
 
@@ -125,13 +125,13 @@ Filter配置与Servlet的配置非常相似，需要配置两部分：配置Filt
 - Annotation注解相应类
 - web.xml
 
-<filter>用于指定Web容器中的过滤器，可包含`<filter-name>`、`<filter-class>`、`<init-param>`、`<icon>`、`<display-name>`、`<description>`。
+`<filter>`用于指定Web容器中的过滤器，可包含`<filter-name>`、`<filter-class>`、`<init-param>`、`<icon>`、`<display-name>`、`<description>`。
 
-- <filter-name>用来定义过滤器的名称，该名称在整个程序中都必须唯一。
-- <filter-class>元素指定过滤器类的完全限定的名称，即Filter的实现类。
-- <init-param>为Filter配置参数，与<context-param>具有相同的元素描述符<param-name>和<param-value>。
+- `<filter-name>`用来定义过滤器的名称，该名称在整个程序中都必须唯一。
+- `<filter-class>`元素指定过滤器类的完全限定的名称，即Filter的实现类。
+- `<init-param>`为Filter配置参数，与`<context-param>`具有相同的元素描述符`<param-name>`和`<param-value>`。
 
-**<filter-mapping>**元素用来声明Web应用中的过滤器映射，过滤器被映射到一个servlet或一个URL 模式。这个过滤器的<filter>和<filter-mapping>必须具有相同的<filter-name>，指定该Filter所拦截的URL。过滤是按照部署描述符的<filter-mapping>出现的顺序执行的。
+`<filter-mapping>`元素用来声明Web应用中的过滤器映射，过滤器被映射到一个servlet或一个URL 模式。这个过滤器的`<filter>`和`<filter-mapping>`必须具有相同的`<filter-name>`，指定该Filter所拦截的URL。过滤是按照部署描述符的`<filter-mapping>`出现的顺序执行的。
 
 
 #### Example
@@ -185,7 +185,7 @@ Web应用启动时立即创建`Servlet`实例，即`load-on-start Servlet`。
 - 在`web.xml`文件中进行配置。
 
 我们用web.xml文件来配置Servlet，需要配置`<servlet>`和`<servlet-mapping>`。
-`<servlet>`用来声明一个Servlet。`<icon>`、`<display-name>`和`<description>`元素的用法和`<filter>`的用法相同。`<init-param>`元素与`<context-param>`元素具有相同的元素描述符，可以使用<init-param>子元素将初始化参数名和参数值传递给Servlet，访问Servlet配置参数通过ServletConfig对象来完成，ServletConfig提供如下方法：
+`<servlet>`用来声明一个Servlet。`<icon>`、`<display-name>`和`<description>`元素的用法和`<filter>`的用法相同。`<init-param>`元素与`<context-param>`元素具有相同的元素描述符，可以使用`<init-param>`子元素将初始化参数名和参数值传递给Servlet，访问Servlet配置参数通过ServletConfig对象来完成，ServletConfig提供如下方法：
 - java.lang.String.getInitParameter(java.lang.String name)：用于获取初始化参数
 - ServletConfig获取配置参数的方法和ServletContext获取配置参数的方法完全一样，只是ServletConfig是取得当前Servlet的配置参数，而ServletContext是获取整个Web应用的配置参数。
 
@@ -204,11 +204,11 @@ Web应用启动时立即创建`Servlet`实例，即`load-on-start Servlet`。
 举个例子：如果有两个Servlet元素都含有`<load-on-startup>`子元素，则`<load-on-startup>`子元素值较小的`Servlet`将先被加载。如果`<load-on-startup>`子元素值为空或负值，则由Web容器决定什么时候加载Servlet。如果两个Servlet的`<load-on-startup>`子元素值相同，则由Web容器决定先加载哪一个Servlet。
 `<load-on-startup>1</load-on-startup>`表示启动容器时，初始化Servlet。
 
-**<servlet-mapping>**
+**`<servlet-mapping>`**
 
-<servlet-mapping>含有<servlet-name>和<url-pattern>
-- <servlet-name>：Servlet的名字，唯一性和一致性，与<servlet>元素中声明的名字一致。
-- <url-pattern>：指定相对于Servlet的URL的路径。该路径相对于web应用程序上下文的根路径。<servlet-mapping>将URL模式映射到某个Servlet，即该Servlet处理的URL。
+`<servlet-mapping>`含有`<servlet-name>`和`<url-pattern>`
+- `<servlet-name>`：Servlet的名字，唯一性和一致性，与`<servlet>`元素中声明的名字一致。
+- `<url-pattern>`：指定相对于Servlet的URL的路径。该路径相对于web应用程序上下文的根路径。`<servlet-mapping>`将URL模式映射到某个Servlet，即该Servlet处理的URL。
 
 **加载Servlet的过程**
 容器的Context对象对请求路径(URL)做出处理，去掉请求URL的上下文路径后，按路径映射规则和Servlet映射路径i`<url- pattern>`做匹配，如果匹配成功，则调用这个Servlet处理请求。
