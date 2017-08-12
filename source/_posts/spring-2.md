@@ -28,6 +28,24 @@ tags: [Java, Spring]
 | Jar File | Description | 
 |-----|-------------|
 | aop      | 如果你要用到AOP功能，或是你用到的Spring的其他模块用到了这个功能，你就需要把这个包添加进你的项目中|
-| aspects  | 如果你用到了AspectJ AOP的功能就要包含这个包 |
+| aspects  | 如果你用到了AspectJ AOP的功能就要包含这个包（Aspectj是Eclipse出的一个AOP的编程框架，Spring 兼容了它） |
+| bean | 包含了所有用来实现Spring控制bean的类，其中很多类也都支持Spring的bean工程模式，例如解析xml和注解的类|
+| context | 这个包给Spring core提供了很多扩展能力，Spring的很多功能都依赖于此，并且实现交互的脚本语言也是集成在其中的 | 
+| context-support | 这个包有扩展了context的功能，例如邮件支持、模板引擎例如Velocity、FreeMaker，此外还有很多作业的执行和调度，例如CommonJ(计时器)和Quartz(作业调度)都打包在这里。|
+| core | 这是你必须包含的包，其中的类被用在很多其他的包中，并且有一些全局工具你也可以用在自己的代码中 | 
+| expression | 这个包是支持Spring Expression Language的，是一种强大而简洁的装配Bean的方式 |
+| instrument | 这个模块包括Java虚拟机的引导(翻译有待确认)？当你在使用AspectJ时需要使用这个包 |
+| instrument-tomcat | JVM Bootstrapping in the tomcat-server | 
+| jdbc | 数据库链接操作相关 |
+| messaging | 是基于消息的应用相关的，以及支持STOMP消息文本协议 | 
+| orm | 扩展了JDBC，支持ORM框架，诸如Hibernate、JDO、JPA |
+| oxm | 支持Object/XML Mapping (OXM) | 
+| test | 提供了强大的单元测试的功能，紧密集成了JUnit | 
+| tx | 支持分布式事物操作 | 
+| web | web功能的核心，支持了文件上传，参数解析等 | 
+| web-mvc | 支持MVC模式的web | 
+| web-portlet | 门户网站服务器部署支持（Not know）|
+| websocket | 支持Java API for WebSocket（Not know） |
 
+随后讲了你可以用maven获取这些，就像你不知道maven一样
 
