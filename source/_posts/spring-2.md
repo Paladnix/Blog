@@ -26,7 +26,7 @@ tags: [Java, Spring]
 在Spring4.0.2发行版中一共有20个包。每个模块的包名格式如下，以aop为例：spring-aop-4.0.2.RELEASE.jar
 
 | Jar File | Description | 
-|----------|-------------|
+|-----|-------------|
 | aop      | 如果你要用到AOP功能，或是你用到的Spring的其他模块用到了这个功能，你就需要把这个包添加进你的项目中|
 | aspects  | 如果你用到了AspectJ AOP的功能就要包含这个包 |
 
