@@ -179,3 +179,18 @@ $ git status
 
 ```
 手动合并，然后再pull。
+
+# 错误的git pull怎么办
+
+在你同步远端的时候，发现远端与你的不同太多，你需要新拉一个分支，保留自己目前的分支的时候，你需要回退到之前的某个版本。一般就会退到pull之间的版本，所以下面的命令：
+
+`git reset --hard HEAD`
+
+回退两个commit：
+
+`git reset --hard HEAD^`
+
+查看历史的commit记录，选择退到某个版本：
+`git log`
+
+上面命令中的`HEAD` 可以换成任何一个历史commit的编号ID。like this : `40a85d646d6f6b05bac2bf5ce2b9a1f44ed74d4d`
