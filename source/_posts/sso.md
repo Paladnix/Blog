@@ -52,11 +52,113 @@ tags: [Solution]
 
 在下一篇Cookie中，也有这方面的内容。
 
-#### 跨域写Cookie
-
-这部分参考下一篇中的跨域
-
 ### 如何认证
 
+我自己用php写了一个简单的模型。还是比较简单的。
+下面就按步骤介绍一下：
+
+#### 修改本地hosts
+
+hosts作为你的联通网络的第一个路由表，你可以做一些修改，比如给自己的电脑绑定n个不同的域名。
+当然这个域名只在你的路由表中，所以只在你的电脑上管用。不过没关系，我们用这种方法模拟出了一个跨域名的环境。
+
+ubuntu下hosts文件：`/etc/hosts`
+
+在其中添加：
+```
+127.0.0.1   baiyan.a
+127.0.0.1   paladnix.b
+
+```
+
+然后我们编写下面的几个php文件来模拟整个过程，文件位置在`/var/www/html/sso/`下。
+
+#### 过程
+
+首先我们去访问：`http://baiyan.a/sso/hello.php`
+```php
+<?php 
+
+if( ($_GET['uuid']== '' || $_GET['uuid']!=553) && ($_COOKIE['uuid']=='' || $_COOKIE['uuid']!=553 )){
+    header("Location:http://paladnix.b/sso/log.php?call_back=http://baiyan.a/sso/hello.php");
+}
+else{
+    setcookie('uuid', $_GET['uuid'], time()+3600);
+    echo "Hello ".$_GET['uuid']." ".$_COOKIE['uuid'];
+}
+
+```
+
+根据你的参数和cookie来确定是否要定向到登录站点。并将自己的uri作为参数附在后面。
+
+跳转到验证点
+```php
+<?php 
+
+$call_back = $_GET['call_back'];
+
+if( $_COOKIE['uuid'] == '' ){
+    header("Location:http://paladnix.b/sso/loginh.php?call_back=$call_back");
+}else{ 
+    $uuid = 553;
+    setcookie('uuid', $uuid);
+    //echo $_COOKIE['uuid'];
+    header("Location:$call_back?uuid=$uuid");
+}
+
+```
+
+在这里判断一下对方最近是否有登录，也是通过cookie来判断，注意这里已经是另外一个域名了，所以cookie已经不一样了。没有登录定向到登录页面。
+
+```php
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+
+    <body>
+        <form method="post" action="login.php">
+        <input type="text" name="name" value="" />
+        <br>
+        <input type="text" name="pw" value=""/>
+        <br>
+        <input type="hidden" name="call_back" value="<?php echo $_GET['call_back'] ?>" />
+
+        <button type="submit">submit</button> 
+        </form>
+    </body>
+</html>
 
 
+```
+在表单中添加了一个隐藏字段，`call_back`。填写信息并去验证。
+
+```php
+<?php
+
+$name = $_POST['name'];
+$pw = $_POST['pw'];
+$call_back = $_POST['call_back'];
+
+if($name == 'baiyan'){
+    $uuid = 553;
+    setcookie('uuid',$uuid, time()+1800);
+    header("Location:$call_back?uuid=$uuid");
+}
+else {
+    header("Location:http://paladnix.b/sso/loginh.php?call_back=$call_back");
+}
+
+```
+验证并且写个cookie，并设置半小时后过期。
+然后就会跳转回去显示hello了。
+
+## 加密
+
+上面的方式都是明文的非藏不安全，一般的做法，我们可以给cookie的内容加密。
+
+在验证方式上，现在是没有再验证uuid的正确性。有些做法会拿到uuid以后再发送给登录服务器去校验真伪。我觉得这个完全可以避免，可以设计一个算法，在本地验证uuid的正确性比较优。
+
+所以在编码uuid的时候我们可以将其有效时间也编在内，校验准确性的同时也也可以校验是否过期。我们可以再增加一个字段，使得uuid是由这个字段通过不可逆计算得到的hash值，然后到本地以后，重复这个算法，比对结果hash是否一致。
+
+逐步完善吧。暂时还没有时间。
