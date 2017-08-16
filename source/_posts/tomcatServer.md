@@ -46,6 +46,10 @@ tomcat是servlet的容器，也就是能够运行servlet的一个程序。作为
 
 假设来自客户的请求为：http://localhost:8080/wsota/wsota_index.jsp
 
+在这里有一幅图我觉得非常清晰的说明了这个过程，但是其本身跟这个毫无关系。
+
+![pic](/img/URL)
+
 1. 请求被发送到本机端口8080，被在那里侦听的Coyote HTTP/1.1 Connector获得
 2. Connector把该请求交给它所在的Service的Engine来处理，并等待来自Engine的回应
 3. Engine获得请求localhost/wsota/wsota_index.jsp，匹配它所拥有的所有虚拟主机Host
