@@ -4,7 +4,53 @@ date: 2017-07-31 17:32:01
 tags: [Web, Front]
 ---
 
-angular和angular2.0 的区别，就像雷锋和雷峰塔的区别。
+Angularjs 和Angular2 的区别，就像雷锋和雷峰塔的区别。
 笑尿了。
 
+我是跟着它的官方文档学习的，文档还是比较健全的，也很细致。地址：[Quick Start](npm install -g @angular/cli)
 
+## AngularJS 与 Angular2
+
+关于二者的区别，可以肯定的是angular2一定更好。
+
+在细节上，先来说一下angular的特别之处。
+
+其诞生于09年，提出了双向绑定等新特性的概念使得它一出现就被追捧。然而由于09年移动端还没有大规模出现，所以其不支持移动应用的使用。并且其数据绑定使用的是扫描的方式，性能瓶颈很难突破，所以被更适应时代的angular2代替是历史的必然。
+
+所以angular2就拥有了这些它的小弟做的不好的特性。
+性能快，支持移动应用开发等。其实现的方式也有很大的区别，所以就出现了雷锋和雷锋塔的区别。
+
+## 直接来学习angular2的使用
+
+首先在什么都不懂的时候先来构建一个实例应用打个招呼：
+
+以下的部分需要：node 6.9.x and npm 3.x.x 及以上。这部分可以去看我的node相关的文章。
+
+**Step 1. Install the Angular CLI globally.**
+```
+npm install -g @angular/cli
+
+```
+**Step 2. Create a new project**
+```
+ng new my-app
+```
+**Step 3: Serve the application**
+```
+cd my-app
+ng serve --open
+
+```
+
+你可以看到效果，现在我们来看文件目录。
+
+你的应用需要的内容都在`src`文件夹中。其他的文件都是用来支撑这个应用的框架代码。下面我们看一下`src`文件夹的结构：
+
+### src
+
+| File | Purpose |
+|------|:---------|
+|app/app.component.{ts,html,css,spec.ts} | 定义组件。HTML模板，CSS，Unit Test。这是一个root组件 |
+|app/app.module.ts | 声明应用如何装配 |
+| assets/ | 静态资源 |
+| environments/ | 
