@@ -53,4 +53,25 @@ ng serve --open
 |app/app.component.{ts,html,css,spec.ts} | 定义组件。HTML模板，CSS，Unit Test。这是一个root组件 |
 |app/app.module.ts | 声明应用如何装配 |
 | assets/ | 静态资源 |
-| environments/ | 
+| environments/ | 存放你应用在不同环境下的配置文件。例如在开发环境还是在发布环境 |
+| index.html | 入口，也是你经常要编辑的文件，angular默认加载所有的js和css，所以不需要写任何的`<script>`和`<link>` |
+| main.ts | 应用的主要入口，你可以用just-in-time编译模式或者ahead-in-time模式进行调试开发。|
+| polyfills.ts | 不同浏览器支持的文件 |
+| style.css | 全局的样式，对所有的应用都起作用的 |
+| test.ts | 单元测试的入口， 你貌似并不需要编辑这个文件 |
+| tsconfig.{app|spec}.json | TypeScript compiler 配置文件，for Angular app and unit tests |
+
+### 其他目录
+
+| File | Purpose |
+|:-----|:--------|
+| `e2e` | end-to-end 测试，是个独立的模块|
+| `node_modules/` | Node.js 创建这个文件夹，用于存放第三方组件，组建列表在package.json 文件中|
+| `.angular-cli.json` | 你可以修改哪些文件需要在build的时候被包含进去 | 
+| `.gitignore` | 用来将自动生成的文件不纳入资源管理的范围内 |
+| `package.json` | npm 配置文件，用于配置第三方的组件 | 
+| `protractor.conf.js` | 在点对点测试的时候的配置文件 |
+| `tsconfig.json` | Typescript 编译配置文件，对IDE有作用 | 
+| `tslint.json` | 标准化你的代码风格 | 
+
+
