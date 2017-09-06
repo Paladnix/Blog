@@ -74,4 +74,25 @@ ng serve --open
 | `tsconfig.json` | Typescript 编译配置文件，对IDE有作用 | 
 | `tslint.json` | 标准化你的代码风格 | 
 
+## 从头开始开发一个Angular Application
+
+第一步都是建立工程，所谓建立工程就是建立一个像样的文件夹目录，angular有一个git项目用于快速搭建目录环境，所以第一步的构建需要这样做：
+
+### Setup
+
+```
+git clone https://github.com/angular/quickstart.git quickstart
+cd quickstart
+npm install
+npm start
+
+```
+然后你会看到一个Hello， 说明建立完成，但是此时有很多没有用的文件我们可以删掉，包括之前的git相关的文件：
+```
+xargs rm -rf < non-essential-files.osx.txt
+rm src/app/*.spec*.ts
+rm non-essential-files.osx.txt
+```
+一些不重要的文件都在一个上面命令中的这个文件中了，以空格分开。
+
 
