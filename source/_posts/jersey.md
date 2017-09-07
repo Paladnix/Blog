@@ -134,3 +134,59 @@ public class PrintersResource {
    client.close();
 ```
 基本用法就是这样了，可以用来对自己的API进行测试，也可以去调其他的API。
+
+## jesey的几种参数注解
+
+在写接口的时候接受的参数有这么几种，上面已经介绍过了`@PathParam`， 下面就系统的介绍一下几种参数。
+
+### @PathParam()
+
+可以认为是定义在路径中的一个变量。程序提取对应路径位置的字符串作为对应的参数。使用方式在上面有所以不详细介绍了。
+
+### @QueryParam()
+
+该参数用于获取Get请求中的查询参数，他和上一个的区别是它是通过URI中的？符号来实现的。
+```
+@GET
+@Path("/user")
+@Produces("text/plain")
+public User getUser(@QueryParam("name") String name, @QueryParam("age") int age) { 
+...}
+```
+当请求是：`http://localhost:8080/user?name=cesar&age=21`时会被这个方法捕获。
+
+### @FormParam()
+
+顾名思义就是表单中的数据
+```
+@POST
+@Consumes("application/x-www-form-urlencoded")
+publicvoid post(@FormParam("name") String name) { 
+// Store the message
+}
+```
+
+### 默认参数值@DefaultValue
+
+当你希望在函数获取参数时参数有一个默认值，那么就可以使用该注释，它的使用方法如下
+```
+@GET
+@Path("/user")
+@Produces("text/plain")
+public User getUser(@QueryParam("name") String name, @DefaultValue("26") @QueryParam("age") int age) { 
+...}
+```
+
+### 使用Map的参数@Context
+
+在一个大型的server中，由于参数的多变，参数结构的调整很容易遇到问题，这时候就可以考虑使用@Context来进行注释了。例子如下：
+
+```
+@GET
+public String get(@Context UriInfo ui) { 
+ MultivaluedMap<String, String> queryParams = ui.getQueryParameters(); 
+MultivaluedMap<String, String> pathParams = ui.getPathParameters();
+}
+```
+接下来你会用到遍历map和删除map元素的操作来做一些处理。
+
