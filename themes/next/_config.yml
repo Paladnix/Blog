@@ -160,7 +160,7 @@ social_icons:
 
 # Sidebar Avatar
 in theme directory(source/img): /img/favicon.ico
-# in site  directory(source/uploads): /uploads/avatar.jpg
+in site  directory(source/img): /img/favicon.ico
 #avatar:
 
 
