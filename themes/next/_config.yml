@@ -159,8 +159,8 @@ social_icons:
 
 
 # Sidebar Avatar
-in theme directory(source/img): /img/favicon.ico
-in site  directory(source/img): /img/favicon.ico
+#in theme directory(source/img): /img/favicon.ico
+#in site  directory(source/img): /img/favicon.ico
 #avatar:
 
 
