@@ -1,5 +1,5 @@
 ---
-title: Javascript 异步操作: Promise, async
+title: Javascript 异步操作- Promise, async
 date: 2017-11-19 20:45:34
 tags: [Javascript, Web]
 ---
