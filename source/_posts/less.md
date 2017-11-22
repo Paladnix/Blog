@@ -48,10 +48,11 @@ content: @@var;
 ## 字符串嵌入
 
 变量可以用类似ruby和php的方式嵌入到字符串中，像@{name}这样的结构:
-```
+
+`
 @base-url: "http://assets.fnord.com";
 background-image: url("@{base-url}/images/bg.png");
-```
+`
 
 ## 作用域
 
