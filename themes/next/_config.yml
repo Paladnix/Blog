@@ -14,7 +14,7 @@ keywords: "Hexo, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+since: 2017
 
 # icon between year and author @Footer
 authoricon: heart
@@ -32,7 +32,7 @@ copyright: true
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
@@ -279,21 +279,21 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night
 
 
 # ---------------------------------------------------------------
 # Third Party Services Settings
 # ---------------------------------------------------------------
 
-reward_comment: Talk is cheap, show me your money. 
+reward_comment: Talk is not cheap. 
 alipay: http://115.28.164.8/Paladnix.github.io/alipay.jpg
 
 
 # MathJax Support
 mathjax:
-  enable: false
-  per_page: false
+  enable: true
+  per_page: true
   cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 
@@ -381,7 +381,7 @@ duoshuo_info:
 # Facebook SDK Support.
 # https://github.com/iissnan/hexo-theme-next/pull/410
 facebook_sdk:
-  enable: false
+  enable: true
   app_id:       #<app_id>
   fb_admin:     #<user_id>
   like_button:  #true
@@ -391,7 +391,7 @@ facebook_sdk:
 # This plugin depends on Facebook SDK.
 # If facebook_sdk.enable is false, Facebook comments plugin is unavailable.
 facebook_comments_plugin:
-  enable: false
+  enable: true
   num_of_posts: 10  # min posts num is 1
   width: 100%       # default width is 550px
   scheme: light     # default scheme is light (light or dark)
