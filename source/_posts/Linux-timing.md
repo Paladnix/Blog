@@ -62,12 +62,13 @@ sudo /etc/init.d/cron restart       // restart
 ## crontab 用法
 
 使用：
-`
+```
 crontab –e : 修改 crontab 文件，如果文件不存在会自动创建。 
 crontab –l : 显示 crontab 文件。 
 crontab -r : 删除 crontab 文件。
 crontab -ir : 删除 crontab 文件前提醒用户。
-`
+
+```
 
 其中，`-e`是编辑当前用户的配置文件，默认是存放在`/var/spool/cron/crontabs/`目录下。
 只要服务启动着，编辑保存这个文件，定时任务就设定好了，有的时候可能真正执行会有1-2分钟的延时。

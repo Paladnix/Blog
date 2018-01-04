@@ -384,8 +384,8 @@ facebook_sdk:
   enable: true
   app_id:       #<app_id>
   fb_admin:     #<user_id>
-  like_button:  #true
-  webmaster:    #true
+  like_button:  true
+  webmaster:    true
 
 # Facebook comments plugin
 # This plugin depends on Facebook SDK.
