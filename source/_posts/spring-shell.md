@@ -1,7 +1,7 @@
 ---
 title: spring-shell
 date: 2017-08-10 13:59:53
-tags: [Java, spring]
+tags: [Java, Spring]
 ---
 
 这是一个spring框架提供的编写shell命令的一个工具，能够让你用spring的编程模式编写命令支持在shell运行。

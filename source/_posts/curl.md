@@ -1,7 +1,7 @@
 ---
 title: curl
 date: 2017-07-11 17:37:47
-tags: [linux, http]
+tags: [Linux, Http]
 ---
 
 linux下面自带的一个命令行工具，很常用，关键是很强大。

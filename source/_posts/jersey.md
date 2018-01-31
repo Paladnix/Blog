@@ -1,7 +1,7 @@
 ---
 title: jersey
 date: 2017-07-01 20:32:52
-tags: [Java, jersy, Web]
+tags: [Java, Jersy, Web]
 ---
 
 jersy是一个Web Service的框架，据说是符合RESTful架构的一种框架，这是一种新的思路，而不是新的技术，是对于前端的各种技术而言，所设计的后台实现方式，力图以一种统一的方便的方式组织为前端提供数据。

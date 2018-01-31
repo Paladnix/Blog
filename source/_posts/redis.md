@@ -1,7 +1,7 @@
 ---
 title: redis
 date: 2017-07-14 11:42:58
-tags: [NoSQL, redis]
+tags: [NoSQL, Redis]
 ---
 
 redis 是一个高速的高级的键值对存储系统。开源的，高可用，高效。

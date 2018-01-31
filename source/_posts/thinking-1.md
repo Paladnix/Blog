@@ -2,7 +2,7 @@
 title: 随想-1
 date: 2017-05-21 10:06:11
 type: "tags"
-tags: [ Self,thinking]
+tags: [Self,Thinking]
 ---
 
 最近听民谣，都是比较低沉的，各种无奈、不得志等等。。。但是这个阶段的我听了却是一脸的轻蔑。
