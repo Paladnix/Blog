@@ -1,7 +1,7 @@
 ---
 title: chrome 控制台
 date: 2017-07-16 12:56:55
-tags: [Web, http, Console]
+tags: [Web, Http, Console]
 ---
 
 chrome是一个非常好用的Web开发的工具，而不仅仅是个好用的浏览器。

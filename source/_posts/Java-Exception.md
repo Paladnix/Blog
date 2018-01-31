@@ -1,7 +1,7 @@
 ---
 title: Java Exception & Error
 date: 2017-07-13 17:24:27
-tags: [Java, Error, life]
+tags: [Java, Error, Life]
 ---
 
 你没有看错，这篇文章的tags中有`人生`。又一次开始思考人生，总有Bug想害朕。

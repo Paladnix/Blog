@@ -1,7 +1,7 @@
 ---
 title: 学习更深C/C++语言之前的思想准备
 date: 2017-05-19 19:46:17
-tags: [self]
+tags: [Self]
 categories: study
 ---
 
