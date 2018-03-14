@@ -31,12 +31,11 @@ task ID done
 ```
 
 - 修改task信息
-```bash
-task ID modify [project:xx] [due:xx] [priority:xx]
-```
-其中`due`常用的选项有：
+    ```bash
+    task ID modify [project:xx] [due:xx] [priority:xx]
+    ```
+    其中`due`常用的选项有：
     - eom : end of month
-    - 
 
 - 添加tags
 ```bash
