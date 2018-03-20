@@ -8,4 +8,5 @@ tags: [ACM]
 
 | Title | Link | Tags | Description |
 | :-    | :-   | :-:  | :-          |
-| Picking Strings | CF 923-D | 字典树 | 还没看 | 
+| Picking Strings | [CF 923-D](http://codeforces.com/problemset/problem/923/D) | 字典树 | 还没看 | 
+
