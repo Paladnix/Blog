@@ -16,7 +16,7 @@ Vimium 你可以认为这是一个Chrome下的快捷键设置集合。这个快�
 
 可以打开这个插件，看到下面这个图片。
 
-[img](../img/vimium.png)
+![img](/img/vimium.png)
 
 
 | 快捷键 | 功能说明 |
