@@ -127,7 +127,7 @@ font:
   # Font settings for <code> and code blocks.
   codes:
     external: true
-    family: Comic Sans Ms
+    family: Comic Sans MS
     size:
 
 
