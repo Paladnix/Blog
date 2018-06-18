@@ -113,7 +113,8 @@ Listen 4321
 
 所以要开放某个端口，最后做一步：
 ```
-ln -s sites-avalibale/8088.conf sites-enabled/8088.conf
+cd sites-enabled
+ln -s ../sites-avalibale/8088.conf ./8088.conf
 ```
 
 ## 5. 重启apache服务
