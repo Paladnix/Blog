@@ -159,3 +159,67 @@ scp -P 35291 paladnix@tunnel.paladnix.top:/home/paladnix/a.cpp ./
 接下来就可以各种骚了。
 ngrok是以tcp协议做基础的，所以理论上可以有很多用法。有待开发。
 
+## ngrok 配置文件
+
+ngrok开源的1.x 的版本默认的配置文件是：`$HOME/.ngrok`, 这里的HOME不是PATH中的HOME是机器指定的HOME，一般就是用户目录。
+
+```bash
+
+# vim ~/.ngrok
+
+server_addr: "tunnel.paladnix.top:4443"
+trust_host_root_certs: false
+
+tunnels:
+    ssh:
+        remote_port: 54321 # 指定远程端口是54321， 避免每次都是随机端口
+        proto:
+            tcp: 22
+
+
+```
+
+## 补充
+
+客户端机器需要安装ssh—server，开启sshd服务
+
+```bash
+sudo apt install -y openssh-server
+ps -e | ack sshd
+# 查看是否有启动服务
+# 如果没有启动就手动启动
+sudo service ssh start
+```
+
+## ！解决断链接的问题
+
+在使用的过程中总是频繁的断开连接，这个很影响游戏体验，主要就是ssh保持长连接的问题。
+解决的办法也很简单
+
+### 1. 配置客户端的sshd
+
+```bash
+
+# sudo vim /etc/ssh/sshd_config
+
+# 添加下面代码在最后
+
+ClientAliveInterval 10
+ClientAliveCountMax 5
+
+# 由于断开频繁，因此这里我的时间间隔很小只有10s
+
+```
+
+### 顺带配置客户端的ssh
+
+非必须
+
+```bash
+
+# sudo vim /etc/ssh/ssh_config
+# 在末尾添加
+
+TCPKeepAlive yes
+ServerAliveInteval 30
+```
