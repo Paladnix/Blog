@@ -175,8 +175,13 @@ tunnels:
         remote_port: 54321 # 指定远程端口是54321， 避免每次都是随机端口
         proto:
             tcp: 22
+    
+    http:
+        proto:
+            http: 3000
 
-
+# 启动方式，可以同时启动，也可以单独启动
+ngrok start ssh http
 ```
 
 ## 补充
