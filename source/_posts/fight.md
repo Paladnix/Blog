@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 创业者
 date: 2018-07-09 03:41:30
 tags: [Self]
