@@ -6,7 +6,7 @@ tags: [Java]
 
 线程与池这两个东西在很多语言中都存在，这是一种编程模式。
 池的思维是根本。举个例子，如果某个数据库有一个远程交互的API允许你写代码来远程操作，那么你如果不用池，每条命令都重新发起一个连接，然后要数据库认证身份，然后执行命令。这样的效率不高，你会很当然的想到我要把连接保持住，让多个命令的执行只进行一次身份认证。这个时候就引入池的概念。每次从池中取出对应的连接，执行完命令再放回到池里。
-同样的思维在ACM中我们常用内存池的方法来避免频繁申请内存。
+同样的思维在ACM比赛中我们常用内存池的方法来避免频繁申请内存。
 
 线程作为一种资源，也需要申请，申请也要开销，所以能将申请次数降低就可以提高效率，所以我们搞个池。
 线程是一个进程的执行单元。一个进程中可以有若干线程，每个线程都是独立的执行单元。线程的调度比进程调度要快很多，因为线程调度的资源涉及更小。
@@ -109,24 +109,29 @@ public class Main {
 关于线程还有很多东西，才疏学浅，暂时不深究，因为没用到，在造轮子的时候就会用到了。
 
 ## 线程池
+
 上面只是简单的写写多线程，并没有涉及到池，也就是一种暴力的多线程。
 线程池在Java中也是封装好的一个类，也很方便。
+
 #### 创建线程池
+
 ```java
 ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize,
             keepAliveTime, milliseconds,runnableTaskQueue, threadFactory,handler);
-/*
-    参数说明
 
-    corePoolSize：核心池的大小，这个参数跟后面讲述的线程池的实现原理有非常大的关系。在创建了线程池后，默认情况下，线程池中并没有任何线程，而是等待有任务到来才创建线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，从这2个方法的名字就可以看出，是预创建线程的意思，即在没有任务到来之前就创建corePoolSize个线程或者一个线程。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中；
-    
-    maximumPoolSize：线程池最大线程数，这个参数也是一个非常重要的参数，它表示在线程池中最多能创建多少个线程；
-
-    keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。默认情况下，只有当线程池中的线程数大于corePoolSize时，keepAliveTime才会起作用，直到线程池中的线程数不大于corePoolSize，即当线程池中的线程数大于corePoolSize时，如果一个线程空闲的时间达到keepAliveTime，则会终止，直到线程池中的线程数不超过corePoolSize。但是如果调用了allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；
-
-*/
 ```
+
+**参数说明**
+
+    - corePoolSize：核心池的大小，这个参数跟后面讲述的线程池的实现原理有非常大的关系。在创建了线程池后，默认情况下，线程池中并没有任何线程，而是等待有任务到来才创建线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，从这2个方法的名字就可以看出，是预创建线程的意思，即在没有任务到来之前就创建corePoolSize个线程或者一个线程。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中；
+    
+    - maximumPoolSize：线程池最大线程数，这个参数也是一个非常重要的参数，它表示在线程池中最多能创建多少个线程；
+
+    - keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。默认情况下，只有当线程池中的线程数大于corePoolSize时，keepAliveTime才会起作用，直到线程池中的线程数不大于corePoolSize，即当线程池中的线程数大于corePoolSize时，如果一个线程空闲的时间达到keepAliveTime，则会终止，直到线程池中的线程数不超过corePoolSize。但是如果调用了allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；
+
+
 创建完线程池，要向线程池提交程序，跟多线程一样，你的类实现`Runable`接口，重写`run()` 函数就可以了。
+
 ```java
  executor.execute(myTask);
 
