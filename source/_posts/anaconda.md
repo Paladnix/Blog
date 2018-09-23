@@ -1,5 +1,5 @@
 ---
-title: Tutorial of anaconda
+title: Tutorial of anaconda & 原生虚环境
 tags:
   - Python
 date: 2018-03-28 17:31:19
@@ -71,9 +71,71 @@ conda list
 conda remove --name nlpcc-1.0 --all
 
 # 进入一个环境
-activate nlpcc-1.0
+source activate nlpcc-1.0
 
 # 离开当前环境
 deactivate
 ```
 
+#### 虚环境
+
+很多时候如果是普通的工程开发的python项目conda并不能很好的找到需要包，所以还是要回到pip上来。但是依然有隔离生产环境的需求，因此就出现了虚环境。
+
+虚环境通过一个第三方程序实现，其实非常简单，就是一个库的复制。
+
+1. 安装
+```
+sudo pip install virtualenv
+
+```
+
+2. 创建虚环境
+在任何文件夹下运行下面的命令就会产生一个对应的文件夹，关于这个环境的一切都在这里。
+```
+virtualenv my_project
+
+# 在当前文件夹下创建一个文件夹，并把python拷贝一份。
+
+# 可以在创建虚环境的时候制定使用的python的版本。
+
+virtualenv -p /usr/bin/python2.7  my_project
+
+```
+
+3. 使用环境
+
+首先就是激活一个环境
+```
+source my_project/bin/activate
+```
+
+此后安装的包都是安装在当前的环境中的，因此是完全隔离的。
+
+
+结束使用该环境
+```
+deactivate
+```
+
+4. 删除一个环境就只要删除对应的文件夹即可。
+
+
+#### 环境保持
+
+往往在开发的时候，我们使用的某个库的版本并不一定会被后来的版本完全兼容，python中这太常见了。
+
+因此为了方便我们在次还原环境，我们需要导出一份包的配置。
+
+```
+pip freeze > requirements.txt
+```
+这样就备份了一份，回头可以直接安装
+
+```
+pip install -r requirements.txt
+```
+
+
+#### 更优雅的管理虚环境
+
+这个可以使用：`virtualenvwrapper`的包来实现。
